@@ -39,9 +39,10 @@ function handler(evt) {
 `);
   instance.show();
 
-  window.addEventListener("keydown", abc);
+  window.addEventListener("keydown", abc, { once: true });
   function abc(e) {
-    if (e.code === "Escape") {
+    if (e.code === "Escape" ) {
+    
       instance.close();
     }
   }
