@@ -31,8 +31,7 @@ function handler(evt) {
    if (evt.target.nodeName !== 'IMG') {
      return;
    }
-  
-  
+    
   const instance = basicLightbox.create(`
     <div class="modal">
     <img src="${evt.target.dataset.source}" width="800" height="600" >
