@@ -32,24 +32,31 @@ function handler(evt) {
     return;
   }
 
-  const modalEL = basicLightbox.create(`
+  const modalEL = basicLightbox.create(
+    `
     <div class="modal">
     <img src="${evt.target.dataset.source}" width="800" height="600" >
     </div>
-`);
-  
+`,
+    {
+      onShow: () => {
+        window.addEventListener("keydown", closeEsp);
+      },
+      onClose: () => {
+        window.removeEventListener("keydown", closeEsp);
+      },
+    }
+  );
+
   modalEL.show();
 
   window.addEventListener("keydown", closeEsp);
 
   function closeEsp(e) {
     if (e.code === "Escape") {
-      modalEL.close(() => window.removeEventListener("keydown", closeEsp));
-      
+      modalEL.close();
     }
   }
-  
 }
-
 
 console.log(galleryItems);
