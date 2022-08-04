@@ -28,23 +28,28 @@ function createImg(galleryItems) {
 
 function handler(evt) {
   evt.preventDefault();
-   if (evt.target.nodeName !== 'IMG') {
-     return;
-   }
-    
-  const instance = basicLightbox.create(`
+  if (evt.target.nodeName !== "IMG") {
+    return;
+  }
+
+  const modalEL = basicLightbox.create(`
     <div class="modal">
     <img src="${evt.target.dataset.source}" width="800" height="600" >
     </div>
 `);
-  instance.show();
+  
+  modalEL.show();
 
-  window.addEventListener("keydown", abc, { once: true });
-  function abc(e) {
-    if (e.code === "Escape" ) {
-    
-      instance.close();
+  window.addEventListener("keydown", closeEsp);
+
+  function closeEsp(e) {
+    if (e.code === "Escape") {
+      modalEL.close(() => window.removeEventListener("keydown", closeEsp));
+      
     }
   }
+  
 }
 
+
+console.log(galleryItems);
